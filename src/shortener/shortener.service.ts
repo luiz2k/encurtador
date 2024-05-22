@@ -75,7 +75,7 @@ export class ShortenerService {
     };
   }
 
-  async findOne(shortened_url: string) {
+  async redirect(shortened_url: string) {
     const isExist = await this.shortenerRepository.findOne({
       where: {
         shortened_url: shortened_url,
@@ -90,14 +90,33 @@ export class ShortenerService {
       visits: isExist.visits + 1,
     });
 
+    return {
+      error: false,
+      message: 'URL encontrada',
+      data: {
+        url: isExist.url,
+      },
+    };
+  }
+
+  async findOne(shortened_url: string) {
+    const isExist = await this.shortenerRepository.findOne({
+      where: {
+        shortened_url: shortened_url,
+      },
+    });
+
+    if (!isExist) {
+      throw new NotFoundException('URL não encontrada');
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { _id, ...rest } = isExist;
 
     return {
       error: false,
-      message: 'URL encontrada',
+      message: 'Dados encontrados',
       data: {
-        visits: isExist.visits + 1,
         ...rest,
       },
     };
