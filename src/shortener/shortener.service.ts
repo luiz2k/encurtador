@@ -58,7 +58,7 @@ export class ShortenerService {
 
     data.url = createShortenerDto.url;
     data.shortened_url = cuid;
-    data.visit = 0;
+    data.visits = 0;
     data.created_at = Date.now();
 
     await this.shortenerRepository.save(data);

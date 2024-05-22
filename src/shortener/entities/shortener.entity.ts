@@ -12,7 +12,7 @@ export class ShortenerEntity {
   shortened_url: string;
 
   @Column()
-  visit: number;
+  visits: number;
 
   @Column()
   created_at: number;
