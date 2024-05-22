@@ -75,7 +75,7 @@ export class ShortenerService {
     };
   }
 
-  async redirect(shortened_url: string) {
+  async findOne(shortened_url: string) {
     const isExist = await this.shortenerRepository.findOne({
       where: {
         shortened_url: shortened_url,

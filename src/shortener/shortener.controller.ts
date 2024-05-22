@@ -12,7 +12,7 @@ export class ShortenerController {
   }
 
   @Get(':shortened_url')
-  async redirect(@Param('shortened_url') shortened_url: string) {
-    return await this.shortenerService.redirect(shortened_url);
+  async findOne(@Param('shortened_url') shortened_url: string) {
+    return await this.shortenerService.findOne(shortened_url);
   }
 }
