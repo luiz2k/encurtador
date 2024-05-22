@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CreateShortenerDto } from './dto/create-shortener.dto';
 import { ShortenerService } from './shortener.service';
 
@@ -9,5 +9,10 @@ export class ShortenerController {
   @Post()
   async create(@Body() createShortenerDto: CreateShortenerDto) {
     return await this.shortenerService.create(createShortenerDto);
+  }
+
+  @Get(':shortened_url')
+  async redirect(@Param('shortened_url') shortened_url: string) {
+    return await this.shortenerService.redirect(shortened_url);
   }
 }

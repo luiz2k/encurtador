@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { init } from '@paralleldrive/cuid2';
 import { Repository } from 'typeorm';
@@ -70,6 +70,34 @@ export class ShortenerService {
       error: false,
       message: 'URL encurtada',
       data: {
+        ...rest,
+      },
+    };
+  }
+
+  async redirect(shortened_url: string) {
+    const isExist = await this.shortenerRepository.findOne({
+      where: {
+        shortened_url: shortened_url,
+      },
+    });
+
+    if (!isExist) {
+      throw new NotFoundException('URL não encontrada');
+    }
+
+    await this.shortenerRepository.update(isExist._id, {
+      visits: isExist.visits + 1,
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { _id, ...rest } = isExist;
+
+    return {
+      error: false,
+      message: 'URL encontrada',
+      data: {
+        visits: isExist.visits + 1,
         ...rest,
       },
     };
