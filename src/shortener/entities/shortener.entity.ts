@@ -16,4 +16,8 @@ export class ShortenerEntity {
 
   @Column()
   created_at: number;
+
+  constructor(shortener?: Partial<ShortenerEntity>) {
+    Object.assign(this, shortener);
+  }
 }
