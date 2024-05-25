@@ -11,13 +11,13 @@ export class ShortenerController {
     return await this.shortenerService.create(createShortenerDto);
   }
 
-  @Get(':shortened_url')
-  async redirect(@Param('shortened_url') shortened_url: string) {
-    return await this.shortenerService.redirect(shortened_url);
+  @Get(':pathname')
+  async redirect(@Param('pathname') pathname: string) {
+    return await this.shortenerService.redirect(pathname);
   }
 
-  @Get('details/:shortened_url')
-  async findOne(@Param('shortened_url') shortened_url: string) {
-    return await this.shortenerService.findOne(shortened_url);
+  @Get('details/:pathname')
+  async findOne(@Param('pathname') pathname: string) {
+    return await this.shortenerService.findOne(pathname);
   }
 }
