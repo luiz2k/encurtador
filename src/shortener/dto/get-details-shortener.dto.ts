@@ -1,15 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsUrl } from 'class-validator';
 
-export class CreateShortenerDto {
-  @IsString({ message: 'URL deve ser uma string' })
-  @IsUrl({}, { message: 'URL inválida' })
-  @IsNotEmpty({ message: 'URL é obrigatória' })
-  @ApiProperty({ description: 'URL a ser encurtada' })
-  url: string;
-}
-
-export class CreateShortenerResponseDto {
+export class GetDetailsShortenerResponseDto {
   @ApiProperty({
     description: 'Indica se houve erro na requisição',
     default: false,
@@ -26,7 +17,7 @@ export class CreateShortenerResponseDto {
       url: { type: 'string' },
       shortened_url: { type: 'string' },
       visits: { type: 'number' },
-      created_at: { type: 'string' },
+      created_at: { type: 'number' },
     },
   })
   data: {

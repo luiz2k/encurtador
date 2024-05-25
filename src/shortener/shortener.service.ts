@@ -2,8 +2,13 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { init } from '@paralleldrive/cuid2';
 import { Repository } from 'typeorm';
-import { CreateShortenerDto } from './dto/create-shortener.dto';
+import {
+  CreateShortenerDto,
+  CreateShortenerResponseDto,
+} from './dto/create-shortener.dto';
+import { RedirectShortenerResponseDto } from './dto/redirect-shortener.dto';
 import { ShortenerEntity } from './entities/shortener.entity';
+import { GetDetailsShortenerResponseDto } from './dto/get-details-shortener.dto';
 
 @Injectable()
 export class ShortenerService {
@@ -12,7 +17,9 @@ export class ShortenerService {
     private readonly shortenerRepository: Repository<ShortenerEntity>,
   ) {}
 
-  async create(createShortenerDto: CreateShortenerDto) {
+  async create(
+    createShortenerDto: CreateShortenerDto,
+  ): Promise<CreateShortenerResponseDto> {
     const ID_LENGTH: number = 5;
 
     const createId = init({
@@ -75,7 +82,7 @@ export class ShortenerService {
     };
   }
 
-  async redirect(shortened_url: string) {
+  async redirect(shortened_url: string): Promise<RedirectShortenerResponseDto> {
     const isExist = await this.shortenerRepository.findOne({
       where: {
         shortened_url: shortened_url,
@@ -99,7 +106,9 @@ export class ShortenerService {
     };
   }
 
-  async findOne(shortened_url: string) {
+  async findOne(
+    shortened_url: string,
+  ): Promise<GetDetailsShortenerResponseDto> {
     const isExist = await this.shortenerRepository.findOne({
       where: {
         shortened_url: shortened_url,
