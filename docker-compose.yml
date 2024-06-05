@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  development:
+    container_name: shortener-dev
+    build:
+      context: .
+      target: development
+    command: npm run start:dev
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/shortener
+    volumes:
+      - .:/usr/src/app 
+    depends_on: 
+      - mongodb
+
+
+  mongodb:
+    container_name: shortener-mongo
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+    
+
+  production:
+    container_name: shortener-prod
+    build:
+      context: .
+      target: production
+    command: npm run start:prod
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - .:/usr/src/app
+
+volumes:
+  mongodb:
