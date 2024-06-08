@@ -33,7 +33,7 @@ $ npm run test
 ![Imagem do projeto](https://i.imgur.com/RbSN8Ji.png)
 
 Acesse também o repositório do [Front-end](#)  
-Acesse a documentação do [Back-end](#)
+Acesse a documentação do [Back-end](https://encurtador-api.onrender.com/docs)
 
 ### 📝 Sobre o projeto
 Uma API para encurtar links que permite aos usuários encurtar URLs longas. Esta API oferece endpoints para criar links curtos, obter informações links encurtados e redirecionar links encurtadas para sua URL original.
@@ -44,5 +44,6 @@ Uma API para encurtar links que permite aos usuários encurtar URLs longas. Esta
 - MongoDB
 - TypeORM
 - Swagger
+- Jest
 - Prettier / ESLint
 - Docker
