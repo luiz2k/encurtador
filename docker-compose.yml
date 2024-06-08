@@ -16,7 +16,6 @@ services:
     depends_on: 
       - mongodb
 
-
   mongodb:
     container_name: shortener-mongo
     image: mongo
@@ -24,18 +23,6 @@ services:
       - 27017:27017
     volumes:
       - mongodb:/data/db
-    
-
-  production:
-    container_name: shortener-prod
-    build:
-      context: .
-      target: production
-    command: npm run start:prod
-    ports:
-      - ${PORT}:${PORT}
-    volumes:
-      - .:/usr/src/app
 
 volumes:
   mongodb:
