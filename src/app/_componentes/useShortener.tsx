@@ -1,18 +1,21 @@
 import { SetUrl, urlSchema } from '@/utils/validations/shortenerSchema';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Url } from './types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { shortenUrl } from '@/services/shortener';
 
 export function useShortener() {
-  const getLocalStorage =
-    typeof window !== 'undefined' && localStorage.getItem('url');
-  const localStorageData: SetUrl[] =
-    JSON.parse(getLocalStorage as string) || [];
+  const [shortenedUrls, setShortenedUrls] = useState<SetUrl[]>([]);
 
-  const [shortenedUrls, setShortenedUrls] =
-    useState<SetUrl[]>(localStorageData);
+  useEffect(() => {
+    const getLocalStorage = localStorage.getItem('url');
+
+    const localStorageData: SetUrl[] =
+      JSON.parse(getLocalStorage as string) || [];
+
+    setShortenedUrls(localStorageData);
+  }, []);
 
   const {
     register,
@@ -29,7 +32,7 @@ export function useShortener() {
     try {
       const shortenedUrl = await shortenUrl(data.url);
 
-      const filter = localStorageData.filter(
+      const filter = shortenedUrls.filter(
         (item) => item.pathname === shortenedUrl.data.shortened_url,
       );
 
@@ -54,7 +57,7 @@ export function useShortener() {
             shortened_url: `${url}${shortenedUrl.data.shortened_url}`,
             pathname: shortenedUrl.data.shortened_url,
           },
-          ...localStorageData,
+          ...shortenedUrls,
         ]),
       );
     } catch (error: any) {
