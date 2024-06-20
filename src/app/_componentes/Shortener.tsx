@@ -3,6 +3,7 @@
 import { Loader } from 'lucide-react';
 import Link from 'next/link';
 import { useShortener } from './useShortener';
+import { ShortenedUrl } from './ShortenedUrl';
 
 export default function Shortener() {
   const {
@@ -51,35 +52,21 @@ export default function Shortener() {
         <h2 className="font-semibold">URLs Encurtadas</h2>
 
         <div className="space-y-3">
-          {shortenedUrls.map((item) => (
-            <article
-              key={item.shortened_url}
-              className="flex flex-col items-start justify-between rounded bg-gray-100 p-3"
-            >
-              <p className="w-full truncate text-sm">
-                <strong>URL Original: </strong>
-                <Link
-                  href={item.original_url}
-                  title={item.original_url}
-                  target="_blank"
-                  className="hover:underline"
-                >
-                  {item.original_url}
-                </Link>
-              </p>
-              <p className="w-full truncate text-sm">
-                <strong>URL Encurtada: </strong>
-                <Link
-                  href={item.shortened_url}
-                  title={item.shortened_url}
-                  target="_blank"
-                  className="hover:underline"
-                >
-                  {item.shortened_url}
-                </Link>
-              </p>
-            </article>
-          ))}
+          {shortenedUrls.length ? (
+            <>
+              {shortenedUrls.map((item) => (
+                <ShortenedUrl
+                  key={item.pathname}
+                  original_url={item.original_url}
+                  shortened_url={item.shortened_url}
+                />
+              ))}
+            </>
+          ) : (
+            <>
+              <p className="text-sm">Nenhuma URL encurtada</p>
+            </>
+          )}
         </div>
       </section>
     </>
