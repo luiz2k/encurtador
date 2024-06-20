@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Encurtador de URLs
 
-## Getting Started
-
-First, run the development server:
-
+#### Executar a aplicação
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Instale as dependências
+$ npm install
+
+# Faça a build da projeto
+$ npm run build
+
+# Inicie a projeto
+$ npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![Imagem do projeto](https://i.imgur.com/jYTZqXk.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Acesse também o repositório do [Back-end](https://github.com/luiz2k/encurtador-api)  
 
-## Learn More
+### 📝 Sobre o projeto
+Uma API para encurtar links que permite aos usuários encurtar URLs longas. Esta API oferece endpoints para criar links curtos, obter informações links encurtados e redirecionar links encurtadas para sua URL original.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Tecnologias usadas no projeto
+- Next.JS
+- TypeScript
+- React Hook Form
+- Zod
